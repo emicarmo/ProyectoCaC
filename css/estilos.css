@@ -1,0 +1,325 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+
+body{
+    background-color: aliceblue;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+/* HEADER */
+
+.contenedor-header{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.contenedor-header-imagen img{
+    width: 80px;
+    border-radius: 20px;
+}
+
+.contenedor-header-buscador form input{
+    width: 300px;
+}
+
+.contenedor-header-autentificacion a{
+    font-weight: bold;
+}
+
+.contenedor-header-autentificacion a:hover{
+    color: #E35164;
+}
+
+.contenedor-header-carrito .carrito:hover{
+    color: #E35164;
+}
+
+/* NAV */
+
+.color-nav{
+    background-color: #448A92;
+    margin-top: 20px;
+}
+
+.dropdown-menu a:hover{
+    color: #E35164;
+}
+
+.nav-item:hover{
+    font-weight: bold;
+}
+
+.nav-link:hover, .active:hover{
+    color: #E35164;
+}
+
+/* MAIN */
+
+
+.contenedor-carrusel,.carrusel-item{
+    height: 700px;
+}
+
+.contenedor-main-imagen{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 10px;
+    padding: 10px;
+    gap: 10px;
+}
+
+.contenedor-main-imagen img{
+    width: 80px;
+}
+
+.contenedor-preguntas-frecuentes{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.contenedor-preguntas-frecuentes img{
+    width: 400px;
+}
+
+.contenedor-sobre-nosotros{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.contenedor-info-nosotros{
+    width: 50%;
+    margin: 30px;
+}
+
+.contenedor-info-nosotros h2,p,.titulo-quienes-somos{
+    text-align: center;
+}
+
+.titulo-quienes-somos{
+    margin-bottom: 30px;
+}
+
+.contenedor-quienes-somos{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 80px;
+    margin: 50px;
+}
+
+.contenedor-quienes-somos img{
+    width: 150px;
+}
+
+.quienes-somos{
+    text-align: center;
+}
+
+.contenedor-form-contactenos{
+    display: flex;
+    justify-content: center;
+    margin: 30px;
+}
+
+.campos-formulario label{
+    margin: 10px;
+}
+
+.campos-formulario input, textarea{
+    width: 800px;
+    display: block;
+    height: 40px;
+    border-radius: 8px;
+    padding: 5px;
+    border: #448A92 solid 2px;
+}
+
+.campos-formulario textarea{
+    height: 100px;
+}
+
+/* FOOTER */
+
+.footer{
+    background-color: #448A92;
+    position: absolute;
+    width: 100%;
+    margin-top: 10px;
+}
+
+.footer p{
+    color: black;
+    font-weight: bold;
+}
+
+.contenedor-footer{
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.contenedor-footer .titulo{
+    display: flex;
+    align-items: center;
+}
+
+.contenedor-footer .redes a{
+    margin: 10px;
+}
+
+.contenedor-footer .redes a:hover{
+    color: #E35164;
+}
+
+.contenedor-footer .pagos img{
+    width: 40px;
+}
+
+.contenedor-footer .pagos .mercado-pago{
+    width: 70px;
+}
+
+/* RESPONSIVE */
+
+@media (min-width: 420px) and (max-width: 599px) {
+    .contenedor-header{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .contenedor-header-buscador form input{
+        display: none;
+    }
+    .btn-buscador{
+        display: none;
+    }
+    .contenedor-carrusel,.carrusel-item{
+        height: 200px;
+    }
+    .contenedor-preguntas-frecuentes{
+        display: inline;
+        text-align: center;
+    }
+    .contenedor-sobre-nosotros{
+        display: inline;
+    }
+    .contenedor-info-nosotros{
+        width: 90%;
+    }
+    .contenedor-sobre-nosotros-imagen, .contenedor-quienes-somos-imagen{
+        text-align: center;
+    }
+    .contenedor-sobre-nosotros-imagen img{
+        width: 400px;
+    }
+    .contenedor-quienes-somos{
+        display: inline;
+        margin: 130px;
+    }
+    .quienes-somos{
+        margin-top: 15px;
+    }
+    .campos-formulario label{
+        margin: 10px;
+    }
+    
+    .campos-formulario input, textarea{
+        width: 400px;
+        border-radius: 8px;
+        padding: 5px;
+        border: #448A92 solid 2px;
+    }
+    .contenedor-footer{
+        display: inline;
+        text-align: center;
+    }
+    .contenedor-footer .titulo{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 600px) and (max-width: 674px) {
+    .contenedor-header{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .contenedor-header-buscador form input{
+        display: none;
+    }
+    .btn-buscador{
+        display: none;
+    }
+    .contenedor-carrusel,.carrusel-item{
+        height: 250px;
+    }
+    .contenedor-sobre-nosotros{
+        display: inline;
+    }
+    .contenedor-sobre-nosotros-imagen img{
+        width: 400px;
+    }
+    .contenedor-info-nosotros{
+        width: 95%;
+    }
+    .contenedor-sobre-nosotros-imagen, .contenedor-quienes-somos-imagen{
+        text-align: center;
+    }
+    .contenedor-quienes-somos{
+        display: inline;
+        margin: 130px;
+    }
+    .campos-formulario input, textarea{
+        width: 500px;
+        border-radius: 8px;
+        padding: 5px;
+        border: #448A92 solid 2px;
+    }
+    .contenedor-footer{
+        display: inline;
+        text-align: center;
+    }
+    .contenedor-footer .titulo{
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (min-width: 675px) and (max-width: 850px) {
+    .contenedor-header{
+        display: flex;
+        justify-content: space-evenly;
+    }
+    .contenedor-header-buscador form input{
+        display: none;
+    }
+    .btn-buscador{
+        display: none;
+    }
+    .contenedor-carrusel,.carrusel-item{
+        height: 400px;
+    }
+    .contenedor-sobre-nosotros-imagen img{
+        width: 300px;
+        margin-left: 10px;
+    }
+    .campos-formulario input, textarea{
+        width: 600px;
+        border-radius: 8px;
+        padding: 5px;
+        border: #448A92 solid 2px;
+    }
+}
