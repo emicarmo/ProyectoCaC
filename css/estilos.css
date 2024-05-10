@@ -193,6 +193,19 @@ a{
     width: 70px;
 }
 
+/* CATÁLOGO */
+.catalogo-grid div{
+    border: 2px black solid;
+    height: 200px;
+    
+    
+}
+
+.catalogo-grid{
+    gap: 10px;
+    
+}
+
 /* RESPONSIVE */
 
 @media (min-width: 420px) and (max-width: 599px) {
