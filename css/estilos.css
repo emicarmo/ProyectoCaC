@@ -195,15 +195,33 @@ a{
 
 /* CATÁLOGO */
 .catalogo-grid div{
+    display: flex; /*Agregado para usar justify-content: center y align-items: center;*/
     border: 2px black solid;
     height: 200px;
-    
-    
+    text-align: center; /*Agregado para alinear textos extensos*/
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1; /*Agregado para que las palabras se ajusten al contenedor ATENCION no parece responsive aun*/
+
 }
 
 .catalogo-grid{
     gap: 10px;
-    
+
+}
+
+.catalogo-grid a{
+    font-size: 48px;
+    font-weight: bold;
+    color: white;
+    text-shadow: 5px 3px blue, 0px 0px white;
+
+}
+
+.catalogo-grid a:hover{
+    font-size: 64px; /* Agrandamos la letra un 20% */
+    color: green; /* Cambiamos el color a verde */
+
 }
 
 /* RESPONSIVE */
