@@ -274,7 +274,7 @@ a{
 
 
 /* RESPONSIVE (Media queries)*/
-@media (min-width: 420px) and (max-width: 599px) {
+@media (min-width: 412px) and (max-width: 599px) {
     .contenedor-header{
         display: flex;
         justify-content: space-evenly;
@@ -292,8 +292,12 @@ a{
         display: inline;
         text-align: center;
     }
+    .contenedor-preguntas-frecuentes img{
+        width: 50%;
+    }
     .contenedor-sobre-nosotros{
-        display: inline;
+        display: flex;
+        flex-direction: column;
     }
     .contenedor-info-nosotros{
         width: 90%;
@@ -305,8 +309,10 @@ a{
         width: 400px;
     }
     .contenedor-quienes-somos{
-        display: inline;
-        margin: 130px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+        
     }
     .quienes-somos{
         margin-top: 15px;
