@@ -50,7 +50,7 @@
                         <a class="nav-link" href="nosotros.html">Nosotros</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="catalogo.html">Catalogo</a>
+                        <a class="nav-link" href="productos.html">Productos</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contacto.html">Contacto</a>
@@ -61,7 +61,7 @@
     </nav>
     <!-- MAIN -->
     <main class="main">
-        <div id="carouselExampleDark" class="carousel carousel-dark slide">
+        <div id="carouselExampleDark" class="carousel  slide">
             <div class="carousel-indicators">
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
                 <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -101,48 +101,38 @@
             <h1>C E I J Libros</h1>
         </div>
         <hr>
-        <div class="contenedor-preguntas-frecuentes">
-            <img src="image/preguntas-frecuentes.png" alt="">
-            <h2>Preguntas Frecuentes</h2>
-        </div>
-            <div class="accordion container mt-4" id="accordionExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                            Accordion Item #1
-                        </button>
-                    </h2>
-                    <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
+        <!-- Catalogo -->
+        <div class="container my-5">
+            <div class="row catalogo-grid justify-content-center">
+                <div class="col-6 col-md-3" style="background-image: url('image/Pensador.jpg'); background-size: cover; background-position: center;"><!--Probar con: background-size: contain; object-fit: cover; background-position: center;"  si gusta mas que no corte parte superior de la imagen-->
+                    <p><a href="https://sites.google.com/view/secundaria36banfield/p%C3%A1gina-principal/filosof%C3%ADa" target="_blank">Filosofía</a></p>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Accordion Item #2
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
+                <div class="col-6 col-md-3" style="background-image: url('image/Policiales.jpg'); background-size: cover; background-position: center;">
+                    <p><a href="https://www.sbs.com.ar/ficcion/novelas/policial-y-novela-negra" target="_blank">Policial</a></p>
                 </div>
-                <div class="accordion-item">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Accordion Item #3
-                        </button>
-                    </h2>
-                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div class="accordion-body">
-                            <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                        </div>
-                    </div>
+                <div class="col-6 col-md-3" style="background-image: url('image/Alicia.jpg'); background-size: cover; background-position: center;"><!--Probar con: background-size: contain; object-fit: cover; background-position: center;"  si gusta mas que no corte parte superior de la imagen-->
+                    <p><a href="https://www.argentina.gob.ar/educacion/materiales-didacticos/clasicos-universales" target="_blank">Clásicos</a></p>
+                </div>
+                <div class="col-6 col-md-3" style="background-image: url('image/Terror.jpg'); background-size: cover; background-position: center;">
+                    <p><a href="https://pruebat.org/biblioteca/terror-y-suspenso/10" target="_blank">Terror</a></p>
+                </div>
+                <div class="col-6 col-md-3" style="background-image: url('image/Romance.jpg'); background-size: cover; background-position: center;">
+                    <p><a href="https://booknet.com/es/top/novela-romantica" target="_blank">Romance</a></p>
+                </div>
+                <div class="col-6 col-md-3" style="background-image: url('image/Ci-Fi.jpg'); background-size: cover; background-position: center;">
+                    <p><a href="https://tercerafundacion.net/biblioteca/ver/coleccion/180" target="_blank">Ciencia Ficción</a></p>
+                </div>
+                <div class="col-6 col-md-3" style="background-image: url('image/Historia.jpg'); background-size: cover; background-position: center;">
+                    <p><a href="https://www.estudioenescarlata.com/libros/materias/aventuras/novela-historica/AA/" target="_blank">Historia</a></p>
+                </div>
+                <div class="col-6 col-md-3" style="background-image: url('image/Fantasia.jpeg'); background-size: cover; background-position: center;">
+                    <p><a href="https://fantasia.com.ar/fantasia/" target="_blank">Fantasía</a></p>
+                </div>
+                <div class="col-6 col-md-3" style="background-image: url('image/Psicologia.jpg'); background-size: cover; background-position: center;">
+                    <p><a href="https://www.librosdelaarena.com.ar/todos-los-libros/psicologia" target="_blank">Psicología</a></p>
                 </div>
             </div>
+        </div>
     </main>
     <!-- FOOTER -->
     <footer class="footer">
