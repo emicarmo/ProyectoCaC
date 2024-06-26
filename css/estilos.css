@@ -229,6 +229,14 @@ a{
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.10);
 }
 
+.card-img{
+    height: 20vw;
+}
+
+.card-body{
+    height: 300px;
+}
+
 .card.product-wap .card .product-overlay {
   background: rgba(0,0,0,.2);
   visibility: hidden;
