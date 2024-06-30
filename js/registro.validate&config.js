@@ -76,7 +76,7 @@ document.getElementById('registroForm').addEventListener('submit', function(even
     event.preventDefault();// Previene el envío del formulario por defecto
 
     if (validateUsuario() && validateEmail() && validatePassword() && validateConfirmPassword()) {
-        fetch(`${BACKEND_URL}/config`)
+        fetch(`${BACKEND_URL}/api/users/config`)
             .then(response => response.json())
             .then(config => {
                 const BACKEND_URL = config.backendUrl;
@@ -90,7 +90,7 @@ document.getElementById('registroForm').addEventListener('submit', function(even
                 };
 
                 // Envio del formulario al backend
-                fetch(`${BACKEND_URL}/usuario/register`, {
+                fetch(`${BACKEND_URL}/api/users/usuario/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -100,7 +100,7 @@ document.getElementById('registroForm').addEventListener('submit', function(even
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        window.location.href = 'URL_DE_REDIRECCIÓN';// Redirige tras el exito del registro
+                        window.location.href = 'login.html';// Redirige tras el exito del registro
                     } else {
                         alert(data.message);// Muestra mensaje de error recibido del backend si hay error
                     }
