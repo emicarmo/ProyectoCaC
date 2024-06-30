@@ -1,4 +1,4 @@
-// Validación de usuario
+// Valida usuario
 const usuario = document.getElementById('usuario');
 const errorUsuario = document.getElementById('errorUsuario');
 usuario.addEventListener('blur', validateUsuario);// blur metodo para la escucha dinamica al cambiar campo: presenta el error si lo hay
@@ -16,7 +16,7 @@ function validateUsuario() {
     }
 }
 
-// Validación de email
+// Valida email
 const email = document.getElementById('email');
 const errorEmail = document.getElementById('errorEmail');
 email.addEventListener('blur', validateEmail);
@@ -34,7 +34,7 @@ function validateEmail() {
     }
 }
 
-// Validación de contraseña
+// Valida contraseña
 const password = document.getElementById('password');
 const errorPassword = document.getElementById('errorPassword');
 password.addEventListener('blur', validatePassword);
@@ -52,7 +52,7 @@ function validatePassword() {
     }
 }
 
-// Validación de confirmación de contraseña
+// Valida confirmación de contraseña
 const confirmPassword = document.getElementById('confirmPassword');
 const errorConfirmPassword = document.getElementById('errorConfirmPassword');
 confirmPassword.addEventListener('blur', validateConfirmPassword);
@@ -71,9 +71,9 @@ function validateConfirmPassword() {
     }
 }
 
-// Validación y envío del formulario
+// Validacion y envio del formulario
 document.getElementById('registroForm').addEventListener('submit', function(event) {
-    event.preventDefault(); // Previene el envío del formulario por defecto
+    event.preventDefault();// Previene el envío del formulario por defecto
 
     if (validateUsuario() && validateEmail() && validatePassword() && validateConfirmPassword()) {
         fetch(`${BACKEND_URL}/config`)
@@ -81,6 +81,7 @@ document.getElementById('registroForm').addEventListener('submit', function(even
             .then(config => {
                 const BACKEND_URL = config.backendUrl;
                 console.log(BACKEND_URL);//Eliminar despues de ver
+
                 // Datos del formulario
                 const formData = {
                     usuario: usuario.value.trim(),
@@ -88,7 +89,7 @@ document.getElementById('registroForm').addEventListener('submit', function(even
                     password: password.value.trim()
                 };
 
-                // Envío del formulario al backend
+                // Envio del formulario al backend
                 fetch(`${BACKEND_URL}/usuario/register`, {
                     method: 'POST',
                     headers: {
@@ -99,9 +100,9 @@ document.getElementById('registroForm').addEventListener('submit', function(even
                 .then(response => response.json())
                 .then(data => {
                     if (data.success) {
-                        window.location.href = 'URL_DE_REDIRECCIÓN'; // Redirige tras el éxito del registro
+                        window.location.href = 'URL_DE_REDIRECCIÓN';// Redirige tras el exito del registro
                     } else {
-                        alert(data.message); // Muestra mensaje de error recibido del backend si hay error
+                        alert(data.message);// Muestra mensaje de error recibido del backend si hay error
                     }
                 })
                 .catch(error => {
