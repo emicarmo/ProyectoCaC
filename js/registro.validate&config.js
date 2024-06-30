@@ -35,85 +35,102 @@ function validateEmail() {
 }
 
 // Valida contraseña
-const password = document.getElementById('password');
-const errorPassword = document.getElementById('errorPassword');
-password.addEventListener('blur', validatePassword);
+const contrasena = document.getElementById('contrasena');
+const errorcontrasena = document.getElementById('errorcontrasena');
+contrasena.addEventListener('blur', validatecontrasena);
 
-function validatePassword() {
-    const passwordValue = password.value.trim();
-    if (passwordValue.length < 8) {
-        errorPassword.textContent = 'La contraseña debe tener al menos 8 caracteres.';
-        password.classList.add('is-invalid');
+function validatecontrasena() {
+    const contrasenaValue = contrasena.value.trim();
+    if (contrasenaValue.length < 8) {
+        errorcontrasena.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+        contrasena.classList.add('is-invalid');
         return false;
     } else {
-        errorPassword.textContent = '';
-        password.classList.remove('is-invalid');
+        errorcontrasena.textContent = '';
+        contrasena.classList.remove('is-invalid');
         return true;
     }
 }
 
 // Valida confirmación de contraseña
-const confirmPassword = document.getElementById('confirmPassword');
-const errorConfirmPassword = document.getElementById('errorConfirmPassword');
-confirmPassword.addEventListener('blur', validateConfirmPassword);
+const confirmcontrasena = document.getElementById('confirmcontrasena');
+const errorConfirmcontrasena = document.getElementById('errorConfirmcontrasena');
+confirmcontrasena.addEventListener('blur', validateConfirmcontrasena);
 
-function validateConfirmPassword() {
-    const confirmPasswordValue = confirmPassword.value.trim();
-    const passwordValue = password.value.trim();
-    if (confirmPasswordValue !== passwordValue || confirmPasswordValue === '') {
-        errorConfirmPassword.textContent = 'Las contraseñas no coinciden.';
-        confirmPassword.classList.add('is-invalid');
+function validateConfirmcontrasena() {
+    const confirmcontrasenaValue = confirmcontrasena.value.trim();
+    const contrasenaValue = contrasena.value.trim();
+    if (confirmcontrasenaValue !== contrasenaValue || confirmcontrasenaValue === '') {
+        errorConfirmcontrasena.textContent = 'Las contraseñas no coinciden.';
+        confirmcontrasena.classList.add('is-invalid');
         return false;
     } else {
-        errorConfirmPassword.textContent = '';
-        confirmPassword.classList.remove('is-invalid');
+        errorConfirmcontrasena.textContent = '';
+        confirmcontrasena.classList.remove('is-invalid');
         return true;
     }
 }
 
 // Validacion y envio del formulario
 document.getElementById('registroForm').addEventListener('submit', function(event) {
-    event.preventDefault();// Previene el envío del formulario por defecto
+    event.preventDefault(); // Previene el envío del formulario por defecto
 
-    if (validateUsuario() && validateEmail() && validatePassword() && validateConfirmPassword()) {
-        fetch(`${BACKEND_URL}/api/users/config`)
-            .then(response => response.json())
+    if (validateUsuario() && validateEmail() && validatecontrasena() && validateConfirmcontrasena()) {
+        console.log('Validaciones de formulario pasadas, solicitando configuración del backend...');
+
+        fetch(`http://localhost:3000/api/config`)
+            .then(response => {
+                console.log('Respuesta recibida del endpoint /api/config:', response);
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del servidor de configuración');
+                }
+                return response.json();
+            })
             .then(config => {
+                console.log('Configuración recibida:', config);
                 const BACKEND_URL = config.backendUrl;
-                console.log(BACKEND_URL);//Eliminar despues de ver
+                console.log('Backend URL:', BACKEND_URL);
 
                 // Datos del formulario
                 const formData = {
-                    usuario: usuario.value.trim(),
-                    email: email.value.trim(),
-                    password: password.value.trim()
+                    usuario: document.getElementById('usuario').value.trim(),
+                    email: document.getElementById('email').value.trim(),
+                    contrasena: document.getElementById('contrasena').value.trim()// Debe coincidir con lo esperado por el backend, revisar DB
                 };
 
+                console.log('Datos del formulario:', formData);
+
                 // Envio del formulario al backend
-                fetch(`${BACKEND_URL}/api/users/usuario/register`, {
+                return fetch(`${BACKEND_URL}/api/users/usuario/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(formData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        window.location.href = 'login.html';// Redirige tras el exito del registro
-                    } else {
-                        alert(data.message);// Muestra mensaje de error recibido del backend si hay error
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    alert('Hubo un problema con el registro. Inténtelo de nuevo.');
                 });
             })
+            .then(response => {
+                console.log('Respuesta recibida del endpoint de registro:', response);
+                if (!response.ok) {
+                    throw new Error('Error en la respuesta del backend de registro');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Respuesta del backend:', data);
+                if (data.success) {
+                    window.location.href = 'login.html'; // Redirige tras el exito del registro
+                } else {
+                    alert(data.message); // Muestra mensaje de error recibido del backend si hay error
+                }
+            })
             .catch(error => {
-                console.error('Error al obtener la configuración:', error);
+                console.error('Error en el proceso de registro:', error);
+                alert('Hubo un problema con el registro. Inténtelo de nuevo.');
             });
+    } else {
+        console.log('Validaciones de formulario fallidas');
     }
-    
+
 });
 
