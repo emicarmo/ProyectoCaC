@@ -5,7 +5,7 @@ usuario.addEventListener('blur', validateUsuario);// blur metodo para la escucha
 
 function validateUsuario() {
     const usuarioValue = usuario.value.trim();
-    if (usuarioValue.length < 5 || !/^[\w\s._-]+$/.test(usuarioValue) || /\s{2,}/.test(usuarioValue)) {// Regex -regular expresion- excelente para determinar filtros
+    if (usuarioValue.length < 5 || !/^[\w\s._-]+$/.test(usuarioValue) || /\s{2,}/.test(usuarioValue)) {// Regex (!/^[\w\s._-]+$/) -regular expresion- su uso es excelente para determinar filtros
         errorUsuario.textContent = 'El nombre de usuario debe tener al menos 5 caracteres, solo puede contener: letras, números, espacio entre caracteres (no dos espacios seguidos), guión bajo, guión medio y/o punto.';
         usuario.classList.add('is-invalid');
         return false;
