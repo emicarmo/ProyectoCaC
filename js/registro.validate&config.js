@@ -1,11 +1,12 @@
 // Valida usuario
 const usuario = document.getElementById('usuario');
 const errorUsuario = document.getElementById('errorUsuario');
-usuario.addEventListener('blur', validateUsuario);// blur metodo para la escucha dinamica al cambiar campo: presenta el error si lo hay
+usuario.addEventListener('blur', validateUsuario, { passive: true });// blur metodo para la escucha dinamica al cambiar campo: presenta el error si lo hay. Se agrega { passive: true } como tercer parmetro para prevenir que el navegador detenga el normal flujo
+
 
 function validateUsuario() {
     const usuarioValue = usuario.value.trim();
-    if (usuarioValue.length < 5 || !/^[\w\s._-]+$/.test(usuarioValue) || /\s{2,}/.test(usuarioValue)) {// Regex (!/^[\w\s._-]+$/) -regular expresion- su uso es excelente para determinar filtros
+    if (usuarioValue.length < 5 || !/^[\wñÑ\s._-]+$/.test(usuarioValue) || /\s{2,}/.test(usuarioValue)) {// Regex (!/^[\wñÑ\s._-]+$/) -regular expresion- su uso es excelente para determinar filtros
         errorUsuario.textContent = 'El nombre de usuario debe tener al menos 5 caracteres, solo puede contener: letras, números, espacio entre caracteres (no dos espacios seguidos), guión bajo, guión medio y/o punto.';
         usuario.classList.add('is-invalid');
         return false;
@@ -19,11 +20,11 @@ function validateUsuario() {
 // Valida email
 const email = document.getElementById('email');
 const errorEmail = document.getElementById('errorEmail');
-email.addEventListener('blur', validateEmail);
+email.addEventListener('blur', validateEmail, { passive: true });
 
 function validateEmail() {
     const emailValue = email.value.trim();
-    if (!emailValue.includes('@') || emailValue === '') {
+    if (!/^[\wñÑ](?:[\wñÑ._-]*[\wñÑ])?@[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?\.[A-Za-z]{2,}$/.test(emailValue)) {
         errorEmail.textContent = 'El email debe ser válido y contener "@".';
         email.classList.add('is-invalid');
         return false;
@@ -37,7 +38,7 @@ function validateEmail() {
 // Valida contraseña
 const contrasena = document.getElementById('contrasena');
 const errorcontrasena = document.getElementById('errorcontrasena');
-contrasena.addEventListener('blur', validatecontrasena);
+contrasena.addEventListener('blur', validatecontrasena, { passive: true });
 
 function validatecontrasena() {
     const contrasenaValue = contrasena.value.trim();
@@ -55,7 +56,7 @@ function validatecontrasena() {
 // Valida confirmación de contraseña
 const confirmcontrasena = document.getElementById('confirmcontrasena');
 const errorConfirmcontrasena = document.getElementById('errorConfirmcontrasena');
-confirmcontrasena.addEventListener('blur', validateConfirmcontrasena);
+confirmcontrasena.addEventListener('blur', validateConfirmcontrasena, { passive: true });
 
 function validateConfirmcontrasena() {
     const confirmcontrasenaValue = confirmcontrasena.value.trim();
@@ -86,10 +87,11 @@ document.getElementById('registroForm').addEventListener('submit', function(even
                 }
                 return response.json();
             })
+
             .then(config => {
-                console.log('Configuración recibida:', config);
+                console.log('Configuración recibida:', config);// BORRAR
                 const BACKEND_URL = config.backendUrl;
-                console.log('Backend URL:', BACKEND_URL);
+                console.log('Backend URL:', BACKEND_URL);// BORRAR
 
                 // Datos del formulario
                 const formData = {
@@ -97,8 +99,7 @@ document.getElementById('registroForm').addEventListener('submit', function(even
                     email: document.getElementById('email').value.trim(),
                     contrasena: document.getElementById('contrasena').value.trim()// Debe coincidir con lo esperado por el backend, revisar DB
                 };
-
-                console.log('Datos del formulario:', formData);
+                console.log('Datos del formulario:', formData);// BORRAR
 
                 // Envio del formulario al backend
                 return fetch(`${BACKEND_URL}/api/users/usuario/register`, {
@@ -109,25 +110,35 @@ document.getElementById('registroForm').addEventListener('submit', function(even
                     body: JSON.stringify(formData)
                 });
             })
+
             .then(response => {
                 console.log('Respuesta recibida del endpoint de registro:', response);
                 if (!response.ok) {
                     throw new Error('Error en la respuesta del backend de registro');
+
                 }
                 return response.json();
             })
+
             .then(data => {
-                console.log('Respuesta del backend:', data);
+                console.log('1 Respuesta del backend:', data);// BORRAR una vez comprobado
+                //const result = data.result;// Obtenemos la respuesta del backend
+                //alert(`2 Respuesta del backend: ${result}`);// BORRAR una vez comprobado
+
                 if (data.success) {
+                    alert('Usuario registrado exitosamente');// Muestra mensaje de exito
                     window.location.href = 'login.html'; // Redirige tras el exito del registro
+
                 } else {
-                    alert(data.message); // Muestra mensaje de error recibido del backend si hay error
+                    alert(`Luego de Registrar la devolucion dice: ${data.message}`); // Muestra mensaje de error recibido del backend si hay error
                 }
             })
+            
             .catch(error => {
                 console.error('Error en el proceso de registro:', error);
                 alert('Hubo un problema con el registro. Inténtelo de nuevo.');
             });
+
     } else {
         console.log('Validaciones de formulario fallidas');
     }

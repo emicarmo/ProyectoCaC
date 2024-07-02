@@ -71,7 +71,7 @@ async function loadCatalog(user) {
 }
 
 // Cargar el catálogo cuando el DOM esté completamente cargado
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', { passive: true }, function () {
     // Obtener el usuario desde el URL o desde el almacenamiento de sesiones, según sea necesario
     const urlParams = new URLSearchParams(window.location.search);
     const user = urlParams.get('user'); // Obtener el usuario del URL, ej. '?user=admin'

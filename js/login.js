@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', { passive: true }, function () {
     const form = document.getElementById('loginForm');
     form.addEventListener('submit', function (event) {
         event.preventDefault();
