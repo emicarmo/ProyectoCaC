@@ -17,7 +17,7 @@ async function loadCardTemplate() {
 async function loadCatalog() {
     try {
         const cardTemplate = await loadCardTemplate();
-        const response = await fetch('http://localhost:5000/api/books');  // Reemplazar con la URL real de la API
+        const response = await fetch('http://localhost:3000/api/books');  // Reemplazar con la URL real de la API
         if (!response.ok) {
             throw new Error('Error al cargar el catálogo');
         }
@@ -31,7 +31,7 @@ async function loadCatalog() {
                 .replace('{IMAGE_URL}', book.imagen)
                 .replace('{BOOK_TITLE}', book.nombre)
                 .replace('{BOOK_AUTHORS}', `${splitOnWords(book.descripcion)}....`)
-                .replace('{BOOK_ISB}', `ISBN: ${book.id}`)
+                .replace('{BOOK_ISB}', ``)
                 .replace('{BOOK_PRICE}', book.precio);
 
             const cardElement = document.createElement('div');
