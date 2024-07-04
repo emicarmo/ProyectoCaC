@@ -99,12 +99,12 @@ async function viewBook(id) {
     const book = await response.json();
     console.log(book);
 
-    document.getElementById('viewBookID').innerText = `ID: ${book.id_libros}`;
-    document.getElementById('viewBookName').innerText = `Nombre: ${book.nombre}`;
-    document.getElementById('viewBookCategory').innerText = `Categoría: ${book.categoria}`;
-    document.getElementById('viewBookPublisher').innerText = `Editorial: ${book.editorial}`;
-    document.getElementById('viewBookPrice').innerText = `Precio: ${formatCurrency(book.precio)}`;
-    document.getElementById('viewBookStock').innerText = `Stock: ${book.stock}`;
+    document.getElementById('viewBookID').innerText = `${book.id_libros}`;
+    document.getElementById('viewBookName').innerText = `${book.nombre}`;
+    document.getElementById('viewBookCategory').innerText = `${book.categoria}`;
+    document.getElementById('viewBookPublisher').innerText = `${book.editorial}`;
+    document.getElementById('viewBookPrice').innerText = `${formatCurrency(book.precio)}`;
+    document.getElementById('viewBookStock').innerText = `${book.stock}`;
     document.getElementById('viewBookDescription').innerText = book.descripcion;
     document.getElementById('viewBookImage').src = book.imagen;
 }
