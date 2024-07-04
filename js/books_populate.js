@@ -1,6 +1,9 @@
-// Función para generar un precio aleatorio dentro de un rango específico
-function generatePrice(max, min) {
-    return (Math.random() * (max - min) + min).toFixed(0);
+
+function splitOnWords(text) {
+    const numberOfWords = 20;
+    const words = text.split(' ');
+    selectWords = words.slice(0, numberOfWords);
+    return selectWords.join(' ');
 }
 
 // Función asincrónica para cargar la plantilla de tarjeta desde un archivo 'card.html'
@@ -27,32 +30,26 @@ function renderButtons() {
 // Función asincrónica para cargar el catálogo de libros desde el backend
 async function loadCatalog(user) {
     try {
-        
-        const cardTemplate = await loadCardTemplate(); // Cargamos la plantilla de tarjeta
-        const response = await fetch('https://www.dbooks.org/api/recent');  // Hacer la solicitud al backend
+
+        const cardTemplate = await loadCardTemplate();
+        const response = await fetch('http://localhost:3000/api/books');  // Reemplazar con la URL real de la API
         if (!response.ok) {
             throw new Error('Error al cargar el catálogo');
         }
-        const data = await response.json();  // Convertir la respuesta a JSON
-        const books = data.books;  // Obtener el array de libros desde la respuesta
+        const data = await response.json();
+        console.log(data);
+        const books = data.result;
+
 
         const container = document.getElementById('books-container');  // Obtener el contenedor donde se añadirán las tarjetas
         books.forEach(book => {
-            let price = generatePrice(8500, 2000);  // Generar un precio aleatorio para cada libro (simulado)
 
-            // Reemplazar los marcadores de posición en la plantilla con los datos del libro actual
             let cardHTML = cardTemplate
-                .replace('{IMAGE_URL}', book.image)
-                .replace('{BOOK_TITLE}', book.title)
-                .replace('{BOOK_AUTHORS}', book.authors)
-                .replace('{BOOK_ISB}', book.id)
-                .replace('{BOOK_PRICE}', price);
-            
-                if (user === 'admin') {
-                    console.log("Es admin!"); //Acá iría la versión del catálogo editable
-                    renderButtons();
-                    cardHTML = cardHTML.replace('<div class="mt-4 botones">', '<div class="mt-4 botones"><button id="editBookBtn" class="btn btn-secondary mr-2">Editar Libro</button><button id="deleteBookBtn" class="btn btn-danger">Eliminar Libro</button>');
-                }
+                .replace('{IMAGE_URL}', book.imagen)
+                .replace('{BOOK_TITLE}', book.nombre)
+                .replace('{BOOK_AUTHORS}', `${splitOnWords(book.descripcion)}....`)
+                .replace('{BOOK_ISB}', ``)
+                .replace('{BOOK_PRICE}', book.precio);
 
             // Crear un elemento div para la tarjeta y asignarle el HTML generado
             const cardElement = document.createElement('div');
