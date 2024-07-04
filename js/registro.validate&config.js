@@ -25,7 +25,7 @@ email.addEventListener('blur', validateEmail, { passive: true });
 function validateEmail() {
     const emailValue = email.value.trim();
     if (!/^[\wñÑ](?:[\wñÑ._-]*[\wñÑ])?@[A-Za-z0-9](?:[A-Za-z0-9.-]*[A-Za-z0-9])?\.[A-Za-z]{2,}$/.test(emailValue)) {
-        errorEmail.textContent = 'El email debe ser válido y contener "@".';
+        errorEmail.textContent = 'El email debe ser válido: contener "@", sin espacios en blanco solo se permiten punto, guión medio, guión bajo y no se permiten dos juntos. Controle la finalzación "puntoAlgo" debe ser válida';
         email.classList.add('is-invalid');
         return false;
     } else {
@@ -121,7 +121,7 @@ document.getElementById('registroForm').addEventListener('submit', function(even
             })
 
             .then(data => {
-                console.log('1 Respuesta del backend:', data);// BORRAR una vez comprobado
+                console.log('1 Respuesta del backend en front:', data);// BORRAR una vez comprobado
                 //const result = data.result;// Obtenemos la respuesta del backend
                 //alert(`2 Respuesta del backend: ${result}`);// BORRAR una vez comprobado
 
@@ -136,7 +136,7 @@ document.getElementById('registroForm').addEventListener('submit', function(even
             
             .catch(error => {
                 console.error('Error en el proceso de registro:', error);
-                alert('Hubo un problema con el registro. Inténtelo de nuevo.');
+                alert('Hubo un problema con el registro. Inténtelo de nuevo.');// Aqui mostrar error que empieza en validator.js pasa a controller y lo dispara al front en .json
             });
 
     } else {
