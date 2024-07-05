@@ -34,8 +34,12 @@ async function fetchBooks() {
 async function fetchCategories(){
     const response = await fetch(categoriesEndpoint);
     const data = await response.json();
-    console.log(data);
-    const bookCategorySelect = document.getElementById('bookCategory');
+    return data;
+}
+
+async function fillCategoriesOnAddBookModal(){
+    const data = await fetchCategories();
+    const bookCategorySelect = document.getElementById('addBookCategory');
     bookCategorySelect.innerHTML = '';
 
     data.result.forEach(category => {
@@ -152,7 +156,6 @@ function formatCurrency(value){
 
 // Initialize
 fetchBooks();
-fetchCategories();
 
 document.getElementById('toggle-btn').addEventListener('click', function () {
     document.getElementById('sidebar').classList.toggle('collapsed');
