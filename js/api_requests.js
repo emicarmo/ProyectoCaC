@@ -156,6 +156,7 @@ function formatCurrency(value){
 
 // Initialize
 fetchBooks();
+fillCategoriesOnAddBookModal();
 
 document.getElementById('toggle-btn').addEventListener('click', function () {
     document.getElementById('sidebar').classList.toggle('collapsed');
