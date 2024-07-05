@@ -111,13 +111,36 @@ async function viewBook(id) {
 
 // Delete book
 async function deleteBook(id) {
-    const response = await fetch(`${booksEndpoint}/${id}`, {
-        method: 'DELETE'
-    });
+    Swal.fire({
+        title: `¿Esta seguro que desea eliminar el registro con id: ${id}?`,
+        text: "este cambio no sera reversible!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, Eliminarlo!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+            
+        (async () =>{
+            const response = await fetch(`${booksEndpoint}/${id}`, {
+                method: 'DELETE'
+            });
+    
+            if (response.ok) {
+                (async()=>{
+                    await fetchBooks();
+                })();
+            }}
+        )();
 
-    if (response.ok) {
-        fetchBooks();
-    }
+            Swal.fire({
+            title: "Eliminado!",
+            text: "El libro ha sido eliminado",
+            icon: "success"
+          });
+        }
+      });
 }
 
 function formatCurrency(value){
