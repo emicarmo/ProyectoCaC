@@ -82,14 +82,14 @@
                 </div>
                 <div class="modal-body container-fluid">
                     <div class="row">
-                        <form id="addBookForm" class="col-md-8 px-5">
+                        <form id="addBookForm" class="col-md-8 px-5" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="bookTitle" class="form-label">Título</label>
                                 <input type="text" name="nombre" class="form-control" id="bookTitle" required>
                             </div>
                             <div class="mb-3">
                                 <label for="bookTitle" class="form-label">Editorial</label>
-                                <input type="text" name="editorial" class="form-control" id="bookTitle" required>
+                                <input type="text" name="editorial" class="form-control" id="bookEditorial" required>
                             </div>
                             <div class="mb-3">
                                 <label for="bookPrice" class="form-label">Precio</label>
@@ -146,6 +146,60 @@
                             <div class="col-md-4">
                                 <img id="viewBookImage" alt="Imagen del Libro" class="img-fluid">
                             </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit book Modal -->
+    <div class="modal fade" id="editBookModal" tabindex="-1" aria-labelledby="editBookModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editBookModalLabel">Editar Libro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <form id="editBookForm" class="col-md-8 px-5" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <input type="hidden" name="id" class="form-control" id="editar-id">
+                            </div>
+                            <div class="mb-3">
+                                <label for="bookTitle" class="form-label">Título</label>
+                                <input type="text" name="nombre" class="form-control" id="bookTitle1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bookTitle" class="form-label">Editorial</label>
+                                <input type="text" name="editorial" class="form-control" id="bookEditorial1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bookPrice" class="form-label">Precio</label>
+                                <input type="number" name="precio" class="form-control" id="bookPrice1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bookCategory" class="form-label">Categoría</label>
+                                <select class="form-select" id="editBookCategory1" name="categoria_id" required></select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bookPrice" class="form-label">Stock</label>
+                                <input type="number" name="stock" class="form-control" id="bookStock1" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bookDescription" class="form-label">Descripción</label>
+                                <textarea class="form-control" name="descripcion" id="bookDescription1" rows="3"
+                                    required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="bookImage" class="form-label">Imagen</label>
+                                <input type="file" class="form-control" name="imagen" id="editBookImage1" accept="image/*" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                        <div class="col-md-4">
+                            <img src="https://picsum.photos/id/1020/600/400" alt="preview" id="image-preview-edit" class="img-thumbnail" />
                         </div>
                     </div>
                 </div>

@@ -1,4 +1,4 @@
-const baseUrl ='http://localhost:3000/api'; 
+const baseUrl = 'http://localhost:3000/api';
 const booksEndpoint = `${baseUrl}/books`;
 const categoriesEndpoint = `${baseUrl}/categories`;
 
@@ -22,8 +22,12 @@ async function fetchBooks() {
                         <button class="btn btn-primary btn-sm" onclick="viewBook(${book.id_libros})" data-bs-toggle="modal" data-bs-target="#viewBookModal">
                             <i class="fas fa-eye"></i>
                         </button>
-                        <button class="btn btn-primary btn-sm"><i class="fas fa-edit"></i></button>
-                        <button class="btn btn-danger btn-sm" onclick="deleteBook(${book.id_libros})"><i class="fas fa-trash-alt"></i></button>
+                        <button data-id="${book.id_libros}" class="btn btn-primary btn-sm editar-btn" >
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        <button class="btn btn-danger btn-sm" onclick="deleteBook(${book.id_libros})">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
                     </td>
                 `;
         booksTableBody.appendChild(tr);
@@ -31,13 +35,13 @@ async function fetchBooks() {
 }
 
 // Fetch all categories to fill select field
-async function fetchCategories(){
+async function fetchCategories() {
     const response = await fetch(categoriesEndpoint);
     const data = await response.json();
     return data;
 }
 
-async function fillCategoriesOnAddBookModal(){
+async function fillCategoriesOnAddBookModal() {
     const data = await fetchCategories();
     const bookCategorySelect = document.getElementById('addBookCategory');
     bookCategorySelect.innerHTML = '';
@@ -50,8 +54,130 @@ async function fillCategoriesOnAddBookModal(){
     });
 }
 
+async function fillCategoriesOnEditBookModal() {
+    const data = await fetchCategories();
+    const bookCategorySelect = document.getElementById('editBookCategory');
+    bookCategorySelect.innerHTML = '';
+
+    data.result.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.id_categoria;
+        option.text = category.nombre_cat;
+        bookCategorySelect.appendChild(option);
+    });
+}
+
+/* async function fillCategoriesOnAddBookModal() {
+    const categorias = await fetchCategories();
+    const cargarCategorias = (selectElement) =>{
+        categorias.result.forEach(category => {
+            const option = document.createElement('option');
+            option.value = category.id_categoria; // Obtenemos el id
+            option.textContent = category.nombre_cat; // Obtenemos el nombre
+            selectElement.appendChild(option);
+        });
+    }
+    // Carga las categorias en ambos select
+    cargarCategorias(document.getElementById('editBookCategory'));
+    cargarCategorias(document.getElementById('addBookCategory'));
+} */
+
+// Edit a Book
+
+
+async function cargarFormEdit(id) {
+    try{
+        //console.log(`${booksEndpoint}/${id}`);
+        const respuesta = await fetch(`${booksEndpoint}/${id}`, {
+            method: 'GET'
+        })
+
+        if (!respuesta.ok){
+            throw new Error('Error al obtener los datos del libro')
+        }
+
+        const libro = await respuesta.json();
+        const categories = await fetchCategories();
+        console.log(categories);
+        const selectCategorias = document.getElementById('editBookCategory1');
+        selectCategorias.innerHTML = '';
+        categories.result.forEach(categorie =>{
+            const option = document.createElement('option');
+            option.value = categorie.id_categoria;
+            option.text = categorie.nombre_cat;
+            if (option.value == libro.categoria_id){
+                option.setAttribute('selected', 'selected')
+            }
+            selectCategorias.appendChild(option);
+        })
+
+        document.getElementById('editar-id').value = libro.id_libro
+        document.getElementById('bookTitle1').value = libro.nombre
+        document.getElementById('bookEditorial1').value = libro.editorial
+        document.getElementById('bookPrice1').value = parseFloat(libro.precio) 
+        document.getElementById('bookStock1').value = libro.stock
+        document.getElementById('bookDescription1').value = libro.descripcion
+
+        // Load image book preview
+        const imagePreview = document.getElementById('image-preview-edit');
+        if (libro.imagen) {
+            imagePreview.src = libro.imagen;
+            imagePreview.style.display = 'block';
+        } else {
+            imagePreview.style.display = 'none';
+        }
+        const modal = document.getElementById('editBookModal');
+        const modalBootstrap = new bootstrap.Modal(modal);
+        modalBootstrap.show();
+    }catch(error){
+        console.error('Error al cargar los datos del libro', error);
+    }
+}
+document.getElementById('editBookForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    //const id = document.getElementById('editar-id').value;
+    const titulo = document.getElementById('bookTitle').value;
+    const selectCategorias = document.getElementById('editBookCategory');
+    const categorias = Array.from(selectCategorias.selectedOptions).map(option => option.value);
+    const editorial = document.getElementById('bookEditorial').value;
+    const precio = document.getElementById('bookPrice').value;
+    const stock = document.getElementById('bookStock').value;
+    const descripcion = document.getElementById('bookDescription').value;
+    const imagen = document.getElementById('editBookImage').files[0];
+
+    const formData = new FormData();
+    formData.append('nombre', titulo);
+    formData.append('editorial', editorial);
+    formData.append('precio', parseInt(precio));
+    formData.append('categoria_id', JSON.stringify(categorias));
+    formData.append('stock', parseInt(stock));
+    formData.append('descripcion', descripcion);
+    if (imagen){
+        formData.append('imagen', imagen);
+    }
+
+    try{
+        const respuesta = await fetch(`${booksEndpoint}/${id}`, {
+            method: 'PUT',
+            body: formData
+        });
+
+        if (!respuesta.ok){
+            throw new Error ('Error al modificar el libro');
+        }
+
+        const datos = await respuesta.json();
+        alert('libro modificado exitosamente');
+        console.log('Libro agregado:', datos);
+    } catch(error) {
+        alert('Error al modificar el libro')
+        console.error('Error:', error);
+    }
+})
+
 // Add a new book
-document.getElementById('addBookForm').addEventListener('submit', async(e)=>{
+document.getElementById('addBookForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -60,40 +186,58 @@ document.getElementById('addBookForm').addEventListener('submit', async(e)=>{
         body: formData
     });
 
-    if(response.ok){
+    if (response.ok) {
         Swal.fire({
             title: "Libro creado",
             text: "El libro ha sido guardado correctamente",
             icon: "success"
-          }).then(()=>{
-              fetchBooks();
-              document.querySelector('#addBookModal .btn-close').click();
-              document.getElementById('image-preview').style.display = 'none';
-              e.target.reset();
-          });
-    }else{
+        }).then(() => {
+            fetchBooks().then(()=>{
+                addEventEdit();
+            })
+            document.querySelector('#addBookModal .btn-close').click();
+            document.getElementById('image-preview').style.display = 'none';
+            e.target.reset();
+        });
+    } else {
         Swal.fire({
             title: "Error",
             text: `ah ocurrido algun error`,
             icon: "error"
-          });
+        });
 
         console.log(await response.json());
     }
 });
+
 // Preview Image loaded
-document.getElementById('bookImage').addEventListener('change', function(){
+document.getElementById('bookImage').addEventListener('change', function () {
     const file = this.files[0];
-    if(file){
+    if (file) {
         const reader = new FileReader();
         reader.onload = (e) => {
             document.getElementById('image-preview').src = e.target.result;
             document.getElementById('image-preview').style.display = 'block';
         }
         reader.readAsDataURL(file);
-    }else{
+    } else {
         document.getElementById('image-preview').src = '';
         document.getElementById('image-preview').style.display = 'none';
+    }
+});
+
+document.getElementById('editBookImage1').addEventListener('change', function () {
+    const file = this.files[0];
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            document.getElementById('image-preview-edit').src = e.target.result;
+            document.getElementById('image-preview-edit').style.display = 'block'
+        }
+        reader.readAsDataURL(file);
+    } else {
+        document.getElementById('image-preview-edit').src = '';
+        document.getElementById('image-preview-edit').style.display = 'none';
     }
 });
 
@@ -123,31 +267,32 @@ async function deleteBook(id) {
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Si, Eliminarlo!"
-      }).then((result) => {
+    }).then((result) => {
         if (result.isConfirmed) {
-            
-        (async () =>{
-            const response = await fetch(`${booksEndpoint}/${id}`, {
-                method: 'DELETE'
-            });
-    
-            if (response.ok) {
-                (async()=>{
-                    await fetchBooks();
-                })();
-            }}
-        )();
+
+            (async () => {
+                const response = await fetch(`${booksEndpoint}/${id}`, {
+                    method: 'DELETE'
+                });
+
+                if (response.ok) {
+                    (async () => {
+                        await fetchBooks();
+                    })();
+                }
+            }
+            )();
 
             Swal.fire({
-            title: "Eliminado!",
-            text: "El libro ha sido eliminado",
-            icon: "success"
-          });
+                title: "Eliminado!",
+                text: "El libro ha sido eliminado",
+                icon: "success"
+            });
         }
-      });
+    });
 }
 
-function formatCurrency(value){
+function formatCurrency(value) {
     return new Intl.NumberFormat('es-AR', {
         style: 'currency',
         currency: 'ARS'
@@ -155,7 +300,19 @@ function formatCurrency(value){
 }
 
 // Initialize
-fetchBooks();
+function addEventEdit() {
+    document.querySelectorAll('.editar-btn').forEach(boton => {
+        boton.addEventListener('click', async (e) => {
+            console.log(boton);
+            const id = boton.getAttribute('data-id');
+            console.log(id);
+            await cargarFormEdit(id);
+        })
+    });
+}
+fetchBooks().then(() => {
+    addEventEdit()
+});
 fillCategoriesOnAddBookModal();
 
 document.getElementById('toggle-btn').addEventListener('click', function () {
