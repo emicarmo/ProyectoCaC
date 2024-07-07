@@ -87,7 +87,6 @@ async function fillCategoriesOnEditBookModal() {
 
 async function cargarFormEdit(id) {
     try{
-        //console.log(`${booksEndpoint}/${id}`);
         const respuesta = await fetch(`${booksEndpoint}/${id}`, {
             method: 'GET'
         })
@@ -98,7 +97,9 @@ async function cargarFormEdit(id) {
 
         const libro = await respuesta.json();
         const categories = await fetchCategories();
-        console.log(categories);
+        
+        //console.log(categories);
+        
         const selectCategorias = document.getElementById('editBookCategory1');
         selectCategorias.innerHTML = '';
         categories.result.forEach(categorie =>{
@@ -111,7 +112,7 @@ async function cargarFormEdit(id) {
             selectCategorias.appendChild(option);
         })
 
-        document.getElementById('editar-id').value = libro.id_libro
+        document.getElementById('editar-id').value = libro.id_libros
         document.getElementById('bookTitle1').value = libro.nombre
         document.getElementById('bookEditorial1').value = libro.editorial
         document.getElementById('bookPrice1').value = parseFloat(libro.precio) 
@@ -136,45 +137,86 @@ async function cargarFormEdit(id) {
 document.getElementById('editBookForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    //const id = document.getElementById('editar-id').value;
-    const titulo = document.getElementById('bookTitle').value;
-    const selectCategorias = document.getElementById('editBookCategory');
+    const id_libro = document.getElementById('editar-id');
+    const id = id_libro ? id_libro.value : null;
+    const titulo = document.getElementById('bookTitle1').value;
+    const selectCategorias = document.getElementById('editBookCategory1');
     const categorias = Array.from(selectCategorias.selectedOptions).map(option => option.value);
-    const editorial = document.getElementById('bookEditorial').value;
-    const precio = document.getElementById('bookPrice').value;
-    const stock = document.getElementById('bookStock').value;
-    const descripcion = document.getElementById('bookDescription').value;
+    const editorial = document.getElementById('bookEditorial1').value;
+    const precio = document.getElementById('bookPrice1').value;
+    const stock = document.getElementById('bookStock1').value;
+    const descripcion = document.getElementById('bookDescription1').value;
     const imagen = document.getElementById('editBookImage').files[0];
 
+    // Debugging: Print values to console
+    console.log({
+        id,
+        titulo,
+        categorias,
+        editorial,
+        precio,
+        stock,
+        descripcion,
+        imagen
+    });
+
     const formData = new FormData();
+    formData.append('id', id)
     formData.append('nombre', titulo);
     formData.append('editorial', editorial);
     formData.append('precio', parseInt(precio));
     formData.append('categoria_id', JSON.stringify(categorias));
     formData.append('stock', parseInt(stock));
     formData.append('descripcion', descripcion);
-    if (imagen){
+    if (imagen) {
         formData.append('imagen', imagen);
     }
 
-    try{
-        const respuesta = await fetch(`${booksEndpoint}/${id}`, {
+    try {
+        const response = await fetch(`${booksEndpoint}/${id}`, {
             method: 'PUT',
-            body: formData
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
         });
 
-        if (!respuesta.ok){
-            throw new Error ('Error al modificar el libro');
-        }
 
-        const datos = await respuesta.json();
-        alert('libro modificado exitosamente');
-        console.log('Libro agregado:', datos);
-    } catch(error) {
-        alert('Error al modificar el libro')
+        // Log the response status and body
+        console.log('Response status:', response.status);
+        const responseBody = await response.text();
+        console.log('Response body:', responseBody);
+
+        if (response.ok) {
+            Swal.fire({
+                title: "Libro modificado",
+                text: "El libro ha sido modificado correctamente",
+                icon: "success"
+            }).then(async() => {
+                await fetchBooks().then(async() => {
+                    await addEventEdit();
+                });
+                document.querySelector('#editBookModal .btn-close').click();
+                document.getElementById('image-preview-edit').style.display = 'none';
+                e.target.reset();
+            });
+        } else {
+            Swal.fire({
+                title: "Error",
+                text: `Ha ocurrido un error: ${responseBody}`,
+                icon: "error"
+            });
+            console.error('Error:', responseBody);
+        }
+    } catch (error) {
+        Swal.fire({
+            title: "Error",
+            text: `Error en la solicitud: ${error.message}`,
+            icon: "error"
+        });
         console.error('Error:', error);
     }
-})
+});
 
 // Add a new book
 document.getElementById('addBookForm').addEventListener('submit', async (e) => {
@@ -226,7 +268,7 @@ document.getElementById('bookImage').addEventListener('change', function () {
     }
 });
 
-document.getElementById('editBookImage1').addEventListener('change', function () {
+document.getElementById('editBookImage').addEventListener('change', function () {
     const file = this.files[0];
     if (file) {
         const reader = new FileReader();
