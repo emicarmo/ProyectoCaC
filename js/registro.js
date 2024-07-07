@@ -1,3 +1,5 @@
+// Registro: validate & config
+
 // Valida usuario
 const usuario = document.getElementById('usuario');
 const errorUsuario = document.getElementById('errorUsuario');
@@ -36,38 +38,38 @@ function validateEmail() {
 }
 
 // Valida contraseña
-const contrasena = document.getElementById('contrasena');
-const errorcontrasena = document.getElementById('errorcontrasena');
-contrasena.addEventListener('blur', validatecontrasena, { passive: true });
+const password = document.getElementById('password');
+const errorpassword = document.getElementById('errorpassword');
+password.addEventListener('blur', validatepassword, { passive: true });
 
-function validatecontrasena() {
-    const contrasenaValue = contrasena.value.trim();
-    if (contrasenaValue.length < 8) {
-        errorcontrasena.textContent = 'La contraseña debe tener al menos 8 caracteres.';
-        contrasena.classList.add('is-invalid');
+function validatepassword() {
+    const passwordValue = password.value.trim();
+    if (passwordValue.length < 8) {
+        errorpassword.textContent = 'La contraseña debe tener al menos 8 caracteres.';
+        password.classList.add('is-invalid');
         return false;
     } else {
-        errorcontrasena.textContent = '';
-        contrasena.classList.remove('is-invalid');
+        errorpassword.textContent = '';
+        password.classList.remove('is-invalid');
         return true;
     }
 }
 
 // Valida confirmación de contraseña
-const confirmcontrasena = document.getElementById('confirmcontrasena');
-const errorConfirmcontrasena = document.getElementById('errorConfirmcontrasena');
-confirmcontrasena.addEventListener('blur', validateConfirmcontrasena, { passive: true });
+const confirmpassword = document.getElementById('confirmpassword');
+const errorConfirmpassword = document.getElementById('errorConfirmpassword');
+confirmpassword.addEventListener('blur', validateConfirmpassword, { passive: true });
 
-function validateConfirmcontrasena() {
-    const confirmcontrasenaValue = confirmcontrasena.value.trim();
-    const contrasenaValue = contrasena.value.trim();
-    if (confirmcontrasenaValue !== contrasenaValue || confirmcontrasenaValue === '') {
-        errorConfirmcontrasena.textContent = 'Las contraseñas no coinciden.';
-        confirmcontrasena.classList.add('is-invalid');
+function validateConfirmpassword() {
+    const confirmpasswordValue = confirmpassword.value.trim();
+    const passwordValue = password.value.trim();
+    if (confirmpasswordValue !== passwordValue || confirmpasswordValue === '') {
+        errorConfirmpassword.textContent = 'Las contraseñas no coinciden.';
+        confirmpassword.classList.add('is-invalid');
         return false;
     } else {
-        errorConfirmcontrasena.textContent = '';
-        confirmcontrasena.classList.remove('is-invalid');
+        errorConfirmpassword.textContent = '';
+        confirmpassword.classList.remove('is-invalid');
         return true;
     }
 }
@@ -76,7 +78,7 @@ function validateConfirmcontrasena() {
 document.getElementById('registroForm').addEventListener('submit', function(event) {
     event.preventDefault(); // Previene el envio del formulario por defecto
 
-    if (validateUsuario() && validateEmail() && validatecontrasena() && validateConfirmcontrasena()) {
+    if (validateUsuario() && validateEmail() && validatepassword() && validateConfirmpassword()) {
         console.log('Validaciones de formulario pasadas, solicitando configuración del backend...');
 
         fetch(`http://localhost:3000/api/config`)
@@ -97,7 +99,7 @@ document.getElementById('registroForm').addEventListener('submit', function(even
                 const formData = {
                     usuario: document.getElementById('usuario').value.trim(),
                     email: document.getElementById('email').value.trim(),
-                    contrasena: document.getElementById('contrasena').value.trim()// Debe coincidir con lo esperado por el backend, revisar DB
+                    password: document.getElementById('password').value.trim()// Debe coincidir con lo esperado por el backend, revisar DB
                 };
                 console.log('Datos del formulario:', formData);// BORRAR
 
@@ -122,10 +124,9 @@ document.getElementById('registroForm').addEventListener('submit', function(even
 
             .then(data => {
                 console.log('1 Respuesta del backend en front:', data);// BORRAR una vez comprobado
-                //const result = data.result;// Obtenemos la respuesta del backend
-                //alert(`2 Respuesta del backend: ${result}`);// BORRAR una vez comprobado
 
                 if (data.success) {
+                    localStorage.setItem('token', data.token);
                     alert('Usuario registrado exitosamente');// Muestra mensaje de exito
                     window.location.href = 'login.html'; // Redirige tras el exito del registro
 

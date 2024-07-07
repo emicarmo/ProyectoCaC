@@ -78,15 +78,23 @@
                         <div>
                             <label for="email" class="text-start">Ingrese mail</label>
                             <input type="text" id="email" class="d-flex my-2 form-control" placeholder="example@email.com" autocomplete="email" required><!-- Se cambia type para que permita ñ -->
+                            <div id="errorEmail" style="color: red;"></div>
                         </div>
                         <div>
                             <label for="password" class="text-start">Ingrese contraseña</label>
                             <input type="password" id="password" class="d-flex my-2 form-control" placeholder="Contraseña" autocomplete="new-password" required>
+                            <div id="errorPassword" style="color: red;"></div>
                         </div>
                         <div>
                             <button type="submit" class="btn btn-danger mt-4">Iniciar sesión</button>
                         </div>
                     </form>
+                    <div class="col-md-0">
+                        <div>
+                            <label for="password" class="form-label">No recuerdo la contraseña</label>
+                            <a href="index.html" class="d-block my-2"><h5>[cambiar o recuperar contraseña]</h5></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,3 +128,4 @@
 </body>
 
 </html>
+
