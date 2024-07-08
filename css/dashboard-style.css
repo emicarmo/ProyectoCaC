@@ -1,0 +1,39 @@
+body {
+    display: flex;
+    height: 100vh;
+}
+
+#sidebar {
+    width: 250px;
+    transition: all 0.3s;
+}
+
+#sidebar.collapsed {
+    width: 0;
+}
+
+#content {
+    flex-grow: 1;
+    padding: 20px;
+    overflow: auto;
+}
+
+#toggle-btn {
+    margin-right: auto;
+}
+
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.navbar-brand {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#image-preview{
+    display: none;
+}
