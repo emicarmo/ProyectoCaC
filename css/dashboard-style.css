@@ -28,6 +28,11 @@ body {
     align-items: center;
 }
 
+.nav-item:hover{
+    background-color: #0D6EFD;
+    border-radius: 10px;
+}
+
 .navbar-brand {
     position: absolute;
     left: 50%;

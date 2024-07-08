@@ -22,7 +22,7 @@ async function fetchBooks() {
                         <button class="btn btn-primary btn-sm" onclick="viewBook(${book.id_libros})" data-bs-toggle="modal" data-bs-target="#viewBookModal">
                             <i class="fas fa-eye"></i>
                         </button>
-                        <button data-id="${book.id_libros}" class="btn btn-primary btn-sm editar-btn" >
+                        <button data-id="${book.id_libros}" class="btn btn-warning btn-sm editar-btn" >
                             <i class="fas fa-edit"></i>
                         </button>
                         <button class="btn btn-danger btn-sm" onclick="deleteBook(${book.id_libros})">
