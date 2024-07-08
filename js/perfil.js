@@ -3,10 +3,10 @@
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const token = localStorage.getItem('token');
+
         if (!token) {
-            throw new Error('No hay token disponible');
+            throw new Error('1 en perfil: No hay token disponible');
         }
-        console.log('perfil 1 : Token obtenido de localStorage:', token); // borrar verifica el token
 
         const configResponse = await fetch('http://localhost:3000/api/config');
         if (!configResponse.ok) {
@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         const config = await configResponse.json();
         const BACKEND_URL = config.backendUrl;
 
-        console.log(' perfil 1 : BACKEND_URL:', BACKEND_URL);
+        console.log(' perfil 1.s :ruta  BACKEND_URL:', BACKEND_URL);
 
         const perfilResponse = await fetch(`${BACKEND_URL}/api/users/usuario/perfil`, { 
             headers: {
@@ -24,14 +24,12 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
         if (!perfilResponse.ok) {
-            throw new Error(' Perfil 2: Error al obtener los datos del usuario');
+            throw new Error(' Perfil 2: perfilResponse con fetch hace GET para traer datos al formulario Error al obtener los datos del usuario');
         }
         const data = await perfilResponse.json();
 
-        console.log('Datos del usuario recibidos:', data); // Borrar Aqui informa que viene vacio
-
-        //document.getElementById('usuario').textContent = data.usuario;
-        //document.getElementById('email').textContent = data.email;
+        document.getElementById('usuario').textContent = data.usuario;
+        document.getElementById('email').textContent = data.email;
         //document.getElementById('password').textContent = data.password;
         document.getElementById('nombre').value = data.nombre || '';
         document.getElementById('apellido').value = data.apellido || '';
@@ -48,9 +46,9 @@ document.addEventListener('DOMContentLoaded', async () => {
         perfilForm.addEventListener('submit', async function (event) {
             event.preventDefault();
 
-            //const usuario = document.getElementById('usuario').textContent.trim();
-            //const email = document.getElementById('email').textContent.trim();
-            //const password = document.getElementById('password').textContent.trim();
+            const usuario = data.usuario;
+            const email = data.email;
+            const password = data.password;
             const nombre = document.getElementById('nombre').value.trim();
             const apellido = document.getElementById('apellido').value.trim();
             const fechaNacimiento = document.getElementById('fecha_nacimiento').value.trim();
@@ -62,42 +60,42 @@ document.addEventListener('DOMContentLoaded', async () => {
             const codigoPostal = document.getElementById('codigo_postal').value.trim();
 
             const errores = [];
-
-            if (!nombre) {
+                if (!nombre) {
                 errores.push('El nombre es obligatorio.');
-            }
-            if (!apellido) {
+                }
+                if (!apellido) {
                 errores.push('El apellido es obligatorio.');
-            }
-            if (!fechaNacimiento) {
+                }
+                if (!fechaNacimiento) {
                 errores.push('La fecha de nacimiento es obligatoria.');
-            }
-            if (!telefono) {
+                }
+                if (!telefono) {
                 errores.push('El teléfono es obligatorio.');
-            }
-            if (!direccion) {
+                }
+                if (!direccion) {
                 errores.push('La dirección es obligatoria.');
-            }
-            if (!ciudad) {
+                }
+                if (!ciudad) {
                 errores.push('La ciudad es obligatoria.');
-            }
-            if (!provincia) {
+                }
+                if (!provincia) {
                 errores.push('La provincia es obligatoria.');
-            }
-            if (!pais) {
+                }
+                if (!pais) {
                 errores.push('El país es obligatorio.');
-            }
-            if (!codigoPostal) {
+                }
+                if (!codigoPostal) {
                 errores.push('El código postal es obligatorio.');
-            }
+                }
 
-            if (errores.length > 0) {
+                if (errores.length > 0) {
                 alert(errores.join('\n'));
+
             } else {
                 const dataToUpdate = {
-                    //usuario,
-                    //email,
-                    //password,
+                    usuario,
+                    email,
+                    password,
                     nombre,
                     apellido,
                     fecha_nacimiento: fechaNacimiento,
@@ -110,7 +108,7 @@ document.addEventListener('DOMContentLoaded', async () => {
                 };
 
                 const updateResponse = await fetch(`${BACKEND_URL}/api/users/usuario/update`, {
-                    method: 'POST',
+                    method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
                         'Authorization': `Bearer ${token}`
@@ -134,8 +132,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         });
 
+
     } catch (error) {
-        console.error('Error:', error);
+        console.error('primer try en perfil : Error:', error);
         alert('Hubo un problema al cargar los datos del perfil. Por favor, inténtelo de nuevo más tarde.');
     }
 
