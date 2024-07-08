@@ -49,7 +49,7 @@
                     <input type="text" class="form-control" placeholder="Buscar usuarios...">
                 </div>
                 <div class="col-auto">
-                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addBookModal">Agregar Usuario</button>
+                    <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUserModal">Agregar Usuario</button>
                 </div>
             </div>
 
@@ -74,7 +74,7 @@
                         <th>Acciones</th>
                     </tr>
                 </thead>
-                <tbody id="booksTableBody">
+                <tbody id="usersTableBody">
                     <!-- Filas de libros generadas dinámicamente -->
                 </tbody>
             </table>
@@ -82,13 +82,158 @@
     </div>
 
     <!-- Add User Modal-->
+    <div class="modal fade agregar" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserModalLabel">Agregar Nuevo Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <form id="addUserForm" class="col-md-8 px-5" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="User" class="form-label">Usuario</label>
+                                <input type="text" name="usuario" class="form-control" id="User" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userEmail" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" id="userEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userPassword" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" id="userPassword" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userName" class="form-label">Usuario</label>
+                                <input type="text" name="name" class="form-control" id="userName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userUsername" class="form-label">Apellido</label>
+                                <input type="text" name="username" class="form-control" id="userUsername" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userDateTime" class="form-label">Fecha de nacimiento</label>
+                                <input type="datetime" name="date" id="userDateTime" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="userTelephone" class="form-label">Telefono</label>
+                                <input type="text" name="telephone" class="form-control" id="userTelephone" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userDirection" class="form-label">Direccion</label>
+                                <input type="text" name="direction" class="form-control" id="userDirection" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userCity" class="form-label">Ciudad</label>
+                                <input type="text" name="city" class="form-control" id="userCity" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userProvince" class="form-label">Provincia</label>
+                                <input type="text" name="province" class="form-control" id="userProvince" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userPais" class="form-label">Pais</label>
+                                <input type="text" name="pais" class="form-control" id="userPais" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userPostalCode" class="form-label">Codigo Postal</label>
+                                <input type="text" name="postalcode" class="form-control" id="userPostalCode" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userRol" class="form-label">Rol</label>
+                                <select name="rol" class="form-select" id="userRol" required></select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userState" class="form-label">Estado</label>
+                                <select name="state" class="form-select" id="userState" required></select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- View User Modal -->
     <!-- Edit User Modal -->
+    <div class="modal fade agregar" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editUserModalLabel">Editar Usuario</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body container-fluid">
+                    <div class="row">
+                        <form id="editUserForm" class="col-md-8 px-5" enctype="multipart/form-data">
+                            <div class="mb-3">
+                                <label for="User" class="form-label">Usuario</label>
+                                <input type="text" name="usuario" class="form-control" id="User" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userEmail" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" id="userEmail" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userPassword" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" id="userPassword" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userName" class="form-label">Usuario</label>
+                                <input type="text" name="name" class="form-control" id="userName" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userUsername" class="form-label">Apellido</label>
+                                <input type="text" name="username" class="form-control" id="userUsername" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userDateTime" class="form-label">Fecha de nacimiento</label>
+                                <input type="datetime" name="date" id="userDateTime" class="form-control">
+                            </div>
+                            <div class="mb-3">
+                                <label for="userTelephone" class="form-label">Telefono</label>
+                                <input type="text" name="telephone" class="form-control" id="userTelephone" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userDirection" class="form-label">Direccion</label>
+                                <input type="text" name="direction" class="form-control" id="userDirection" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userCity" class="form-label">Ciudad</label>
+                                <input type="text" name="city" class="form-control" id="userCity" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userProvince" class="form-label">Provincia</label>
+                                <input type="text" name="province" class="form-control" id="userProvince" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userPais" class="form-label">Pais</label>
+                                <input type="text" name="pais" class="form-control" id="userPais" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userPostalCode" class="form-label">Codigo Postal</label>
+                                <input type="text" name="postalcode" class="form-control" id="userPostalCode" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userRol" class="form-label">Rol</label>
+                                <select name="rol" class="form-select" id="userRol" required></select>
+                            </div>
+                            <div class="mb-3">
+                                <label for="userState" class="form-label">Estado</label>
+                                <select name="state" class="form-select" id="userState" required></select>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Actualizar</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/sweetalert2.all.min.js"></script>
-    <script src="js/script.js"></script>
-    <script src="js/usuarios.js"></script>
+    <script src="js/users.js"></script>
     <!-- <script src="./js/api_requests.js"></script> -->
 </body>
 </html>

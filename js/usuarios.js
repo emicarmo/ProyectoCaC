@@ -24,13 +24,13 @@ document.addEventListener('DOMContentLoaded', async function () {
         
         const data = await response.json();
         
-        const usersTableBody = document.getElementById('booksTableBody');// Obtengo el cuerpo de la tabla donde se agregaran los usuarios
+        const usersTableBody = document.getElementById('usersTableBody');// Obtengo el cuerpo de la tabla donde se agregaran los usuarios
         usersTableBody.innerHTML = ''; // Limpia cualquier contenido previo
         
         data.result.forEach(user => {// Itera sobre los usuarios y crea las filas de la tabla data es el objeto recibido result la propiedad que es un array con los datos
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${user.id}</td>
+                <td>${user.id_usuarios}</td>
                 <td>${user.usuario}</td>
                 <td>${user.email}</td>
                 <td>${user.password}</td>
@@ -44,10 +44,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                 <td>${user.pais}</td>
                 <td>${user.codigo_postal}</td>
                 <td>${user.rol}</td>
-                <td>${user.estado}</td>
+                <td>${user.status}</td>
                 <td>
-                    <button class="btn btn-primary btn-sm">Editar</button>
-                    <button class="btn btn-danger btn-sm">Eliminar</button>
+                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
+                        <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="btn btn-danger btn-sm">
+                        <i class="fas fa-trash-alt"></i>
+                    </button>
                 </td>
             `;
             usersTableBody.appendChild(row);
