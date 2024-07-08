@@ -137,8 +137,10 @@ async function cargarFormEdit(id) {
 document.getElementById('editBookForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const id_libro = document.getElementById('editar-id');
-    const id = id_libro ? id_libro.value : null;
+
+    const id = document.getElementById('editar-id').value;
+    // const id_libro = document.getElementById('editar-id');
+    //const id = id_libro ? id_libro.value : null;
     const titulo = document.getElementById('bookTitle1').value;
     const selectCategorias = document.getElementById('editBookCategory1');
     const categorias = Array.from(selectCategorias.selectedOptions).map(option => option.value);
@@ -148,24 +150,24 @@ document.getElementById('editBookForm').addEventListener('submit', async (e) => 
     const descripcion = document.getElementById('bookDescription1').value;
     const imagen = document.getElementById('editBookImage').files[0];
 
-    // Debugging: Print values to console
-    console.log({
-        id,
-        titulo,
-        categorias,
-        editorial,
-        precio,
-        stock,
-        descripcion,
-        imagen
-    });
+    //Debugging: Print values to console
+    // console.log({
+    //     id,
+    //     titulo,
+    //     categorias,
+    //     editorial,
+    //     precio,
+    //     stock,
+    //     descripcion,
+    //     imagen
+    // });
 
     const formData = new FormData();
-    formData.append('id', id)
+    //formData.append('id', id)
     formData.append('nombre', titulo);
     formData.append('editorial', editorial);
     formData.append('precio', parseInt(precio));
-    formData.append('categoria_id', JSON.stringify(categorias));
+    formData.append('categoria_id', selectCategorias.value);
     formData.append('stock', parseInt(stock));
     formData.append('descripcion', descripcion);
     if (imagen) {
