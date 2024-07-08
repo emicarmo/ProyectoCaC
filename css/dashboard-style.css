@@ -44,10 +44,16 @@ li .active:hover{
     align-items: center;
 }
 
+<<<<<<< HEAD
 .navbar-expand-lg{
     background-color: #448A92 !important;
     margin: 0;
     padding: 10px;
+=======
+.nav-item:hover{
+    background-color: #0D6EFD;
+    border-radius: 10px;
+>>>>>>> 2a3ed5cf76bc8a8def3d981c64a8dd5fe1400499
 }
 
 .navbar-brand {
