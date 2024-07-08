@@ -1,15 +1,31 @@
 body {
     display: flex;
     height: 100vh;
+
+    background-color: aliceblue;
+}
+
+li a{
+    color: grey !important;
+}
+
+li .active:hover{
+    color: #E35164 !important;
 }
 
 #sidebar {
     width: 250px;
     transition: all 0.3s;
+
+    background-color: #4A3E64 !important;
 }
 
 #sidebar.collapsed {
     width: 0;
+}
+
+#sidebar.sidebar-hidden {
+    display: none; /* Oculta la barra lateral completamente */
 }
 
 #content {
@@ -28,12 +44,69 @@ body {
     align-items: center;
 }
 
+.navbar-expand-lg{
+    background-color: #448A92 !important;
+    margin: 0;
+    padding: 10px;
+}
+
 .navbar-brand {
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
+
+    
 }
 
 #image-preview{
     display: none;
+}
+
+.btn-danger{
+    background-color: #E35164 !important;
+    border-color: #E35164 !important;
+}
+
+.btn-primary{
+    background-color: #448A92 !important;
+    border-color: #448A92 !important;
+}
+
+.btn-success, .btn-secondary{
+    background-color: #4A3E64 !important;
+    border-color: #4A3E64 !important;
+}
+
+.btn-close:hover{
+    background-color: #E35164 !important;
+}
+
+.modal-body{
+    background-color: aliceblue;
+}
+
+.detalles, .agregar{
+    color: #4A3E64;
+}
+
+.detalles{
+    height: auto;
+}
+
+.detalles .col-md-8{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.detalles .col-md-4{
+    text-align: center;
+}
+
+.detalles .col-md-4 img{
+    border: 2px solid #448A92;
+}
+
+.agregar form{
+    width: 100%;
 }
