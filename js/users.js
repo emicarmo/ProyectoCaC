@@ -46,48 +46,12 @@ async function fetchUsers() {
     
 }
 
-//User rol
-function rol(rol1, rol2){
-    const rolObject = [
-        {
-            valor: 1,
-            rol: rol1
-        },
-        {
-            valor: 2,
-            rol: rol2
-        }
-    ];
-    return rolObject
-}
-
-//User state
-function state(state1, state2){
-    const stateObject = [
-        {
-            valor: 1,
-            rol: state1
-        },
-        {
-            valor: 2,
-            rol: state2
-        }
-    ];
-    return stateObject
-}
-
-//field rol
-function fillRolOnAddUserModal() {
-    const objectRol = rol()
-    
-}
-
 // Add a new user
 document.getElementById('addUserForm').addEventListener('submit', async (e) =>{
     e.preventDefault();
 
     const formData = new FormData(e.target);
-    const response = await fetch(usersEndpoint, {
+    const response = await fetch(`${usersEndpoint}/usuario/register`, {
         method: 'POST',
         body: formData
     })
@@ -97,10 +61,10 @@ document.getElementById('addUserForm').addEventListener('submit', async (e) =>{
             title: "Usuario creado",
             text: "El usuario ha sido guardado correctamente",
             icon: "success"
-        })(async () =>{
+        }).then(async()=>{
             await fetchUsers();
-        })();
-        document.querySelector('#addBookModal .btn-close').click();
+        })
+        document.querySelector('#addUserModal .btn-close').click();
         e.target.reset();
     } else {
         Swal.fire({
@@ -108,6 +72,8 @@ document.getElementById('addUserForm').addEventListener('submit', async (e) =>{
             text: `ah ocurrido algun error`,
             icon: "error"
         });
+
+        console.log(await response.json());
     }
 })
 
