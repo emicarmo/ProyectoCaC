@@ -28,10 +28,10 @@ async function fetchUsers() {
                     <td>${user.rol}</td>
                     <td>${user.status}</td>
                     <td>
-                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#editUserModal">
-                            <i class="fas fa-edit"></i>
+                        <button class="btn btn-primary btn-sm" onclick="viewUser(${user.id_usuarios})" data-bs-toggle="modal" data-bs-target="#viewUserModal">
+                            <i class="fas fa-eye"></i>
                         </button>
-                        <button class="btn btn-danger btn-sm">
+                        <button class="btn btn-danger btn-sm" onclick="deleteUser(${user.id_usuarios})">
                             <i class="fas fa-trash-alt"></i>
                         </button>
                     </td>
@@ -46,8 +46,32 @@ async function fetchUsers() {
     
 }
 
+// View User
+async function viewUser(id) {
+    const response = await fetch(`${usersEndpoint}/${id}`);
+    const user = await response.json();
+    user.result.forEach(user => {
+        document.getElementById('viewUserID').innerText = `${user.id_usuarios}`;
+        document.getElementById('viewUserUser').innerText = `${user.usuario}`;
+        document.getElementById('viewUserEmail').innerText = `${user.email}`;
+        document.getElementById('viewUserPass').innerText = `${user.password}`;
+        document.getElementById('viewUserNombre').innerText = `${user.nombre}`;
+        document.getElementById('viewUserUserName').innerText = `${user.apellido}`;
+        document.getElementById('viewUserDate').innerText =  `${user.fecha_nacimiento}`;
+        document.getElementById('viewUserTelephone').innerText = `${user.telefono}`;
+        document.getElementById('viewUserAndrew').innerText = `${user.direccion}`;
+        document.getElementById('viewUserCity').innerText = `${user.ciudad}`;
+        document.getElementById('viewUserProvince').innerText = `${user.provincia}`;
+        document.getElementById('viewUserCountry').innerText = `${user.pais}`;
+        document.getElementById('viewUserPostalCode').innerText = `${user.codigo_postal}`;
+        document.getElementById('viewUserRol').innerText = `${user.rol}`;
+        document.getElementById('viewUserStatus').innerText = `${user.status}`;
+    });
+
+}
+
 // Add a new user
-document.getElementById('addUserForm').addEventListener('submit', async (e) =>{
+/* document.getElementById('addUserForm').addEventListener('submit', async (e) =>{
     e.preventDefault();
 
     const formData = new FormData(e.target);
@@ -75,8 +99,43 @@ document.getElementById('addUserForm').addEventListener('submit', async (e) =>{
 
         console.log(await response.json());
     }
-})
+}) */
 
+// Delete User
+async function deleteUser(id) {
+    Swal.fire({
+        title: `¿Esta seguro que desea eliminar el usuario con id: ${id}?`,
+        text: "este cambio no sera reversible!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Si, Eliminarlo!"
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            (async () => {
+                const response = await fetch(`${usersEndpoint}/${id}`, {
+                    method: 'DELETE'
+                });
+
+
+                if (response.ok) {
+                    (async () => {
+                        await fetchUsers();
+                    })();
+                }
+            }
+            )();
+
+            Swal.fire({
+                title: "Eliminado!",
+                text: "El usuario ha sido eliminado",
+                icon: "success"
+            });
+        }
+    });
+}
 
 //Initialize
 fetchUsers(); // Trae los usuarios

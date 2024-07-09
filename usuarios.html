@@ -81,8 +81,43 @@
         </div>
     </div>
 
+    <!-- View Users -->
+    <div class="modal fade detalles" id="viewUserModal" tabindex="-1" aria-labelledby="viewUserModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-fullscreen">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="viewUserModalLabel">Detalles del Libro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <h5><strong>ID: </strong><span id="viewUserID"></span></h5>
+                                <h5><strong>Usuario: </strong><span id="viewUserUser"></span></h5>
+                                <h5><strong>Email: </strong><span id="viewUserEmail"></span></h5>
+                                <h5><strong>Contraseña: </strong><span id="viewUserPass"></span></h5>
+                                <h5><strong>Nombre: </strong><span id="viewUserNombre"></span></h5>
+                                <h5><strong>Apellido: </strong><span id="viewUserUserName"></span></h5>
+                                <h5><strong>Fecha de nacimiento: </strong> <span id="viewUserDate"></span></h5>
+                                <h5><strong>Telefono: </strong> <span id="viewUserTelephone"></span></h5>
+                                <h5><strong>Direccion: </strong> <span id="viewUserAndrew"></span></h5>
+                                <h5><strong>Ciudad: </strong> <span id="viewUserCity"></span></h5>
+                                <h5><strong>Provincia: </strong> <span id="viewUserProvince"></span></h5>
+                                <h5><strong>Pais: </strong> <span id="viewUserCountry"></span></h5>
+                                <h5><strong>Codigo Postal: </strong> <span id="viewUserPostalCode"></span></h5>
+                                <h5><strong>Rol: </strong> <span id="viewUserRol"></span></h5>
+                                <h5><strong>Estado: </strong> <span id="viewUserStatus"></span></h5>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Add User Modal-->
-    <div class="modal fade agregar" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade agregar" id="addUserModal" tabindex="-1" aria-labelledby="addUserModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
@@ -160,10 +195,9 @@
                 </div>
             </div>
         </div>
-    </div>
-    <!-- View User Modal -->
+    </div> -->
     <!-- Edit User Modal -->
-    <div class="modal fade agregar" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <!-- <div class="modal fade agregar" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-fullscreen">
             <div class="modal-content">
                 <div class="modal-header">
@@ -175,59 +209,65 @@
                         <form id="editUserForm" class="col-md-8 px-5" enctype="multipart/form-data">
                             <div class="mb-3">
                                 <label for="User" class="form-label">Usuario</label>
-                                <input type="text" name="usuario" class="form-control" id="User1" required>
+                                <input type="text" name="usuario" class="form-control" id="User" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userEmail" class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" id="userEmail1" required>
+                                <input type="email" name="email" class="form-control" id="userEmail" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userPassword" class="form-label">Password</label>
-                                <input type="password" name="password" class="form-control" id="userPassword1" required>
+                                <input type="password" name="password" class="form-control" id="userPassword" required>
                             </div>
                             <div class="mb-3">
-                                <label for="userName" class="form-label">Usuario</label>
-                                <input type="text" name="name" class="form-control" id="userName1" required>
+                                <label for="userName" class="form-label">Nombre</label>
+                                <input type="text" name="name" class="form-control" id="userName" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userUsername" class="form-label">Apellido</label>
-                                <input type="text" name="username" class="form-control" id="userUsername1" required>
+                                <input type="text" name="username" class="form-control" id="userUsername" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userDateTime" class="form-label">Fecha de nacimiento</label>
-                                <input type="datetime" name="date" id="userDateTime1" class="form-control">
+                                <input type="datetime" name="date" id="userDateTime" class="form-control">
                             </div>
                             <div class="mb-3">
                                 <label for="userTelephone" class="form-label">Telefono</label>
-                                <input type="text" name="telephone" class="form-control" id="userTelephone1" required>
+                                <input type="text" name="telephone" class="form-control" id="userTelephone" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userDirection" class="form-label">Direccion</label>
-                                <input type="text" name="direction" class="form-control" id="userDirection1" required>
+                                <input type="text" name="direction" class="form-control" id="userDirection" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userCity" class="form-label">Ciudad</label>
-                                <input type="text" name="city" class="form-control" id="userCity1" required>
+                                <input type="text" name="city" class="form-control" id="userCity" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userProvince" class="form-label">Provincia</label>
-                                <input type="text" name="province" class="form-control" id="userProvince1" required>
+                                <input type="text" name="province" class="form-control" id="userProvince" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userPais" class="form-label">Pais</label>
-                                <input type="text" name="pais" class="form-control" id="userPais1" required>
+                                <input type="text" name="pais" class="form-control" id="userPais" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userPostalCode" class="form-label">Codigo Postal</label>
-                                <input type="text" name="postalcode" class="form-control" id="userPostalCode1" required>
+                                <input type="text" name="postalcode" class="form-control" id="userPostalCode" required>
                             </div>
                             <div class="mb-3">
                                 <label for="userRol" class="form-label">Rol</label>
-                                <select name="rol" class="form-select" id="userRol1" required></select>
+                                <select name="rol" class="form-select" id="userRol" required>
+                                    <option value="cliente">Cliente</option>
+                                    <option value="administrador">Administrador</option>
+                                </select>
                             </div>
                             <div class="mb-3">
                                 <label for="userState" class="form-label">Estado</label>
-                                <select name="state" class="form-select" id="userState1" required></select>
+                                <select name="state" class="form-select" id="userState" required>
+                                    <option value="activo">Activo</option>
+                                    <option value="inactivo">Inactivo</option>
+                                </select>
                             </div>
                             <button type="submit" class="btn btn-primary">Actualizar</button>
                         </form>
@@ -235,7 +275,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="js/sweetalert2.all.min.js"></script>
