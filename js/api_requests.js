@@ -1,4 +1,4 @@
-const serverUrl = 'http://34.46.27.106:3000';
+const serverUrl = 'http://localhost:3000';
 const baseUrl = `${serverUrl}/api`;
 const booksEndpoint = `${baseUrl}/books`;
 const categoriesEndpoint = `${baseUrl}/categories`;
