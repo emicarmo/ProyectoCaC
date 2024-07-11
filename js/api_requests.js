@@ -301,6 +301,12 @@ async function viewBook(id) {
     document.getElementById('viewBookPublisher').innerText = `${book.editorial}`;
     document.getElementById('viewBookPrice').innerText = `${formatCurrency(book.precio)}`;
     document.getElementById('viewBookStock').innerText = `${book.stock}`;
+    document.getElementById('viewBookID').innerText = `${book.id_libros}`;
+    document.getElementById('viewBookName').innerText = `${book.nombre}`;
+    document.getElementById('viewBookCategory').innerText = `${book.categoria}`;
+    document.getElementById('viewBookPublisher').innerText = `${book.editorial}`;
+    document.getElementById('viewBookPrice').innerText = `${formatCurrency(book.precio)}`;
+    document.getElementById('viewBookStock').innerText = `${book.stock}`;
     document.getElementById('viewBookDescription').innerText = book.descripcion;
     document.getElementById('viewBookImage').src = book.imagen;
 }
