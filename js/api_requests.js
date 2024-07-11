@@ -1,3 +1,4 @@
+//const serverUrl = 'http://34.46.27.106:3000';
 const serverUrl = 'http://localhost:3000';
 const baseUrl = `${serverUrl}/api`;
 const booksEndpoint = `${baseUrl}/books`;
@@ -230,6 +231,8 @@ document.getElementById('addBookForm').addEventListener('submit', async (e) => {
         method: 'POST',
         body: formData
     });
+
+    console.log(response);
 
     if (response.ok) {
         Swal.fire({
